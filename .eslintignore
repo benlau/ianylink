@@ -1,0 +1,4 @@
+node_modules
+dist
+tailwind.config.js
+babel.config.js
