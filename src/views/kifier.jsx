@@ -1,5 +1,4 @@
 import React from "react";
-import { UniversalLink } from "../links/universallink";
 import copy from "copy-to-clipboard";
 import { AppConfig } from "../appconfig";
 import { isValidURL, buildURL } from "../links/common";
@@ -8,8 +7,9 @@ import { Content } from "./content";
 import { Heading } from "./heading";
 import { ActionButton } from "./actionbutton";
 import { WhatIsIt } from "./whatisit";
+import { LinkResolver } from "../links/linkresolver";
 
-const universalLink = new UniversalLink();
+const linkResolver = new LinkResolver();
 
 const InfoType = {
     InvalidURL: "InvalidURL",
@@ -91,14 +91,14 @@ export function useKifierState() {
 
         try {
             setConvertedLink(
-                [
-                    AppConfig.host,
-                    AppConfig.uriPrefix,
-                    universalLink.encode(inputLinkTrimmed),
-                ].join(""),
+                linkResolver.encode(
+                    [AppConfig.host, AppConfig.uriPrefix].join(""),
+                    inputLinkTrimmed,
+                ),
             );
             setInfo();
-        } catch {
+        } catch (e) {
+            console.error({ e });
             setConvertedLink("");
             return;
         }

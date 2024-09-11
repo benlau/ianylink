@@ -9,7 +9,7 @@ const linkResolver = new LinkResolver();
 const uriPrefix = AppConfig.uriPrefix;
 
 const url = new URL(window.location.href);
-const redirectLink = linkResolver.resolve(uriPrefix, url);
+const redirectLink = linkResolver.decode(uriPrefix, url);
 
 const domNode = document.getElementById("root");
 const root = createRoot(domNode);

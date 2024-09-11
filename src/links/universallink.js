@@ -13,14 +13,14 @@ export class UniversalLink {
         this.endecoder = new UnicodeLinkEndecoder();
     }
 
-    encode(link) {
+    encodeLink(link) {
         return URI_PREFIX + "/" + this.endecoder.encode(link);
     }
 
-    decode(link) {
-        const found = link.match(ENCODED_LINK_REGEX);
+    decodePath(path) {
+        const found = path.match(ENCODED_LINK_REGEX);
         if (found === null) {
-            return null;
+            return;
         }
         const base64 = found.groups.encoded
             .replace(/-/g, "+")
@@ -35,11 +35,14 @@ export class UniversalLink {
         return found != null && found.groups.encoded != null;
     }
 
+    canEncodeLink(link) {
+        return this.isValidateLink(link);
+    }
+
     isValidateLink(link) {
         //@TODO - test case
         // mailto: xxx
         // javascript: ?
-        // Send to trello
         try {
             new URL(link);
             return true;

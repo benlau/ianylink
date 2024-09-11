@@ -15,8 +15,8 @@ The IAnyLink project is designed to solve this problem. It can convert app links
   <tbody>
     <tr>
       <td>Joplin</td>
-      <td><a href="joplin://x-callback-url/openNote?id=note_id">joplin://x-callback-url/openNote?id=note_id</a></td>
-      <td><a href="https://benlau.github.io/l/u/am9wbGluOi8veC1jYWxsYmFjay11cmwvb3Blbk5vdGU_aWQ9bm90ZV9pZA==">https://benlau.github.io/l/u/am9wbGluOi8veC1jYWxsYmFj<br>ay11cmwvb3Blbk5vdGU_aWQ9bm90ZV9pZA==</a></td>
+      <td><a href="joplin://x-callback-url/openNote?id=ad768a6768564d2bbb2cb87d88b82b31">joplin://x-callback-url/openNote?id=note_id</a></td>
+      <td><a href="http://benlau.github.io/l/j/n/ad768a6768564d2bbb2cb87d88b82b31">http://benlau.github.io/l/j/n/ad768a6768564d2bbb2cb87d88b82b31</td>
     </tr>
     <tr>
       <td>Obsidian</td>

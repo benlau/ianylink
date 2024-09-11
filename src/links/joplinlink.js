@@ -27,36 +27,31 @@ const JoplinActionMappingFromShortToLong = {
 export class JoplinLink {
     constructor() {}
 
-    encode(link) {
+    encodeLink(link) {
         const found = link.match(ENCODE_LINK_REGEX);
         if (found == null) {
-            return null;
+            return;
         }
         const id = found.groups.id;
         const action = JoplinActionMappingFromLongToShort[found.groups.action];
         return `${URI_PREFIX}/${action}/${id}`;
     }
 
-    decode(link) {
-        const found = link.match(DECODED_LINK_REGEX);
+    decodePath(path) {
+        const found = path.match(DECODED_LINK_REGEX);
         if (found == null) {
-            return null;
+            return;
         }
         const id = found.groups.id;
         const action = JoplinActionMappingFromShortToLong[found.groups.action];
         return `joplin://x-callback-url/open${action}?id=${id}`;
     }
 
-    isValidateLink(link) {
-        //@TODO - test case
-        // mailto: xxx
-        // javascript: ?
-        // Send to trello
-        try {
-            new URL(link);
-            return true;
-        } catch (err) {
-            return false;
-        }
+    isEncodedPath(path) {
+        return this.decodePath(path) != null;
+    }
+
+    canEncodeLink(link) {
+        return this.encodeLink(link) != null;
     }
 }
