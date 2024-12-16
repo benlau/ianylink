@@ -9,17 +9,19 @@ const URI_PREFIX = "/u";
  */
 
 export class UniversalLink {
+    private endecoder: UnicodeLinkEndecoder;
+
     constructor() {
         this.endecoder = new UnicodeLinkEndecoder();
     }
 
-    encodeLink(link) {
+    encodeLink(link: string) {
         return URI_PREFIX + "/" + this.endecoder.encode(link);
     }
 
-    decodePath(path) {
+    decodePath(path: string) {
         const found = path.match(ENCODED_LINK_REGEX);
-        if (found === null) {
+        if (found === null || found.groups == null) {
             return;
         }
         const base64 = found.groups.encoded
@@ -29,24 +31,24 @@ export class UniversalLink {
         return decoded;
     }
 
-    isEncodedPath(path) {
+    isEncodedPath(path: string) {
         const found = path.match(ENCODED_LINK_REGEX);
         // check is base64
-        return found != null && found.groups.encoded != null;
+        return found != null && found.groups?.encoded != null;
     }
 
-    canEncodeLink(link) {
+    canEncodeLink(link: string) {
         return this.isValidateLink(link);
     }
 
-    isValidateLink(link) {
+    isValidateLink(link: string) {
         //@TODO - test case
         // mailto: xxx
         // javascript: ?
         try {
             new URL(link);
             return true;
-        } catch (err) {
+        } catch {
             return false;
         }
     }

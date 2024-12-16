@@ -1,7 +1,7 @@
 import { JoplinLink } from "../src/links/joplinlink";
 describe("JoplinLink", () => {
     it("decodePath", () => {
-        const joplinkLink = new JoplinLink();
+        const joplinkLink: JoplinLink = new JoplinLink();
 
         expect(
             joplinkLink.decodePath("/j/n/12345678901234567890123456789012"),
@@ -23,7 +23,7 @@ describe("JoplinLink", () => {
 
         // ID is not 32 characters long
         expect(joplinkLink.decodePath("/j/f/123456789012345678901234567")).toBe(
-            null,
+            undefined,
         );
     });
 
@@ -48,6 +48,6 @@ describe("JoplinLink", () => {
             ),
         ).toBe("/j/f/12345678901234567890123456789012");
 
-        expect(joplinLink.encodeLink("https://example.com")).toBe(null);
+        expect(joplinLink.encodeLink("https://example.com")).toBe(undefined);
     });
 });

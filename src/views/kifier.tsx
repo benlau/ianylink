@@ -54,7 +54,7 @@ function InlineButton(props) {
 }
 
 export function useKifierState() {
-    const [inputLink, setInputLink] = React.useState("");
+    const [inputLink, setInputLink] = React.useState<string>("");
     const [convertedLink, setConvertedLink] = React.useState("");
     const [info, setInfo] = React.useState(undefined);
     const inputLinkRef = React.useRef(null);

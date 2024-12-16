@@ -27,31 +27,39 @@ const JoplinActionMappingFromShortToLong = {
 export class JoplinLink {
     constructor() {}
 
-    encodeLink(link) {
+    encodeLink(link: string) {
         const found = link.match(ENCODE_LINK_REGEX);
-        if (found == null) {
+        if (found == null || found.groups == null) {
             return;
         }
         const id = found.groups.id;
-        const action = JoplinActionMappingFromLongToShort[found.groups.action];
+        const action =
+            JoplinActionMappingFromLongToShort[
+                found.groups
+                    .action as keyof typeof JoplinActionMappingFromLongToShort
+            ];
         return `${URI_PREFIX}/${action}/${id}`;
     }
 
-    decodePath(path) {
+    decodePath(path: string) {
         const found = path.match(DECODED_LINK_REGEX);
-        if (found == null) {
+        if (found == null || found.groups == null) {
             return;
         }
-        const id = found.groups.id;
-        const action = JoplinActionMappingFromShortToLong[found.groups.action];
+        const id = found.groups?.id;
+        const action =
+            JoplinActionMappingFromShortToLong[
+                found.groups
+                    .action as keyof typeof JoplinActionMappingFromShortToLong
+            ];
         return `joplin://x-callback-url/open${action}?id=${id}`;
     }
 
-    isEncodedPath(path) {
+    isEncodedPath(path: string) {
         return this.decodePath(path) != null;
     }
 
-    canEncodeLink(link) {
+    canEncodeLink(link: string) {
         return this.encodeLink(link) != null;
     }
 }
