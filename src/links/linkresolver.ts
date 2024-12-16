@@ -1,10 +1,11 @@
 import { JoplinLink } from "./joplinlink";
 import { UniversalLink } from "./universallink";
+import { UniversalLink2 } from "./universallink2";
 
-const types = [new JoplinLink(), new UniversalLink()];
+const types = [new JoplinLink(), new UniversalLink2(), new UniversalLink()];
 
 export class LinkResolver {
-    decode(prefix, url) {
+    decode(prefix: string, url: URL) {
         const path = url.pathname.replace(new RegExp(`^${prefix}`), "");
 
         const type = types.find((type) => {
@@ -19,7 +20,7 @@ export class LinkResolver {
         return type.decodePath(path);
     }
 
-    encode(prefix, link) {
+    encode(prefix: string, link: string) {
         const type = types.find((type) => {
             return type.canEncodeLink(link);
         });
