@@ -51,6 +51,12 @@ describe("JoplinLink", () => {
             ),
         ).toBe("/j/f/12345678901234567890123456789012");
 
+        expect(
+            joplinLink.encodeLink(
+                "joplin://x-callback-url/openFolder?id=12345678901234567890123456789012#title",
+            ),
+        ).toBe("/j/f/12345678901234567890123456789012#title");
+
         expect(joplinLink.encodeLink("https://example.com")).toBe(undefined);
     });
 });

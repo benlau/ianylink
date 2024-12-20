@@ -30,17 +30,27 @@ export class JoplinLink {
     constructor() {}
 
     encodeLink(link: string) {
-        const found = link.match(ENCODE_LINK_REGEX);
-        if (found == null || found.groups == null) {
+        try {
+            const url = new URL(link);
+
+            const found = link.match(ENCODE_LINK_REGEX);
+            if (found == null || found.groups == null) {
+                return;
+            }
+            const id = found.groups.id;
+            const action =
+                JoplinActionMappingFromLongToShort[
+                    found.groups
+                        .action as keyof typeof JoplinActionMappingFromLongToShort
+                ];
+            let ret = `${URI_PREFIX}/${action}/${id}`;
+            if (url.hash != null) {
+                ret += url.hash;
+            }
+            return ret;
+        } catch {
             return;
         }
-        const id = found.groups.id;
-        const action =
-            JoplinActionMappingFromLongToShort[
-                found.groups
-                    .action as keyof typeof JoplinActionMappingFromLongToShort
-            ];
-        return `${URI_PREFIX}/${action}/${id}`;
     }
 
     decodePath(path: string): DecodedLink | undefined {
