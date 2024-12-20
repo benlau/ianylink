@@ -1,4 +1,4 @@
-import { fromBase64Url, toBase64Url } from "./common.js";
+import { fromBase64Url, toBase64Url } from "./common";
 
 export class UnicodeLinkEndecoder {
     constructor() {}

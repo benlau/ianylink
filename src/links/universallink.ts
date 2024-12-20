@@ -1,4 +1,4 @@
-import { UnicodeLinkEndecoder } from "./unicodelinkendecoder.js";
+import { UnicodeLinkEndecoder } from "./unicodelinkendecoder";
 
 const ENCODED_LINK_REGEX = /^\/u\/(?<encoded>[A-Za-z0-9_\-=]+)/;
 const URI_PREFIX = "/u";
@@ -42,11 +42,11 @@ export class UniversalLink {
     }
 
     isValidateLink(link: string) {
-        //@TODO - test case
-        // mailto: xxx
-        // javascript: ?
         try {
-            new URL(link);
+            const url = new URL(link);
+            if (url.protocol === "javascript:") {
+                return false;
+            }
             return true;
         } catch {
             return false;

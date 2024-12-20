@@ -6,7 +6,15 @@ const types = [new JoplinLink(), new UniversalLink2(), new UniversalLink()];
 
 export class LinkResolver {
     decode(prefix: string, url: URL) {
-        const path = url.pathname.replace(new RegExp(`^${prefix}`), "");
+        let path = url.pathname;
+        if (url.search != "") {
+            path += url.search;
+        }
+        if (url.hash != "") {
+            path += url.hash;
+        }
+
+        path = path.replace(new RegExp(`^${prefix}`), "");
 
         const type = types.find((type) => {
             return type.isEncodedPath(path);

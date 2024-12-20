@@ -1,10 +1,15 @@
 import React from "react";
 
-export function ActionButton(props) {
+export type Props = {
+    children: React.ReactNode;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+};
+
+export function ActionButton(props: Props) {
     const { children, onClick } = props;
 
     const onClickHandler = React.useCallback(
-        (event) => {
+        (event: React.MouseEvent<HTMLButtonElement>) => {
             event.preventDefault();
             event.stopPropagation();
             onClick?.(event);

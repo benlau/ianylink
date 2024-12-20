@@ -53,6 +53,15 @@ describe("UniversalLink2", () => {
         expect(universalLink2.encodeLink("mailto:test@test.com")).toBe(
             "/v/mailto/test@test.com",
         );
+
+        expect(universalLink2.encodeLink("https://中文.tw")).toBe(
+            "/v/https///中文.tw",
+        );
+
+        expect(
+            universalLink2.encodeLink("http://username:password@example.com"),
+        ).toBe("/v/http///username:password@example.com");
+
         expect(universalLink2.encodeLink("javascript:alert('test')")).toBe(
             undefined,
         );
@@ -92,6 +101,16 @@ describe("UniversalLink2", () => {
         expect(universalLink2.decodePath("/v/file////Users/user")).toBe(
             "file:///Users/user",
         );
+
+        expect(universalLink2.decodePath("/v/https///中文.tw")).toBe(
+            "https://中文.tw",
+        );
+
+        expect(
+            universalLink2.decodePath(
+                "/v/http///username:password@example.com",
+            ),
+        ).toBe("http://username:password@example.com");
 
         expect(universalLink2.decodePath("/v/javascript/alert('test')")).toBe(
             undefined,
