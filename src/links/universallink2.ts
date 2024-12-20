@@ -3,6 +3,8 @@
  * Encoded link format: /v/${schema}/${url_remove_schema}
  */
 
+import { DecodedLink } from "./types";
+
 export class UniversalLink2 {
     constructor() {}
 
@@ -23,7 +25,7 @@ export class UniversalLink2 {
         }
     }
 
-    decodePath(path: string) {
+    decodePath(path: string): DecodedLink | undefined {
         try {
             const prefix = "/v/";
             if (!path.startsWith(prefix)) {
@@ -38,7 +40,7 @@ export class UniversalLink2 {
 
             const url = `${schema}:${rest}`;
             new URL(url); // throws error if invalid
-            return url;
+            return { url };
         } catch {
             return;
         }

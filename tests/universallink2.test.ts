@@ -69,47 +69,45 @@ describe("UniversalLink2", () => {
     });
 
     it("should decode a path correctly", () => {
-        expect(universalLink2.decodePath("/v/https///example.com")).toBe(
+        expect(universalLink2.decodePath("/v/https///example.com")?.url).toBe(
             "https://example.com",
         );
-        expect(universalLink2.decodePath("/v/https///example.com/")).toBe(
+        expect(universalLink2.decodePath("/v/https///example.com/")?.url).toBe(
             "https://example.com/",
         );
-        expect(universalLink2.decodePath("/v/https///example.com/path")).toBe(
-            "https://example.com/path",
-        );
         expect(
-            universalLink2.decodePath(
-                "/v/https///example.com/path?query=value",
-            ),
+            universalLink2.decodePath("/v/https///example.com/path")?.url,
+        ).toBe("https://example.com/path");
+        expect(
+            universalLink2.decodePath("/v/https///example.com/path?query=value")
+                ?.url,
         ).toBe("https://example.com/path?query=value");
         expect(
             universalLink2.decodePath(
                 "/v/https///example.com/path?query=value&query2=value2",
-            ),
+            )?.url,
         ).toBe("https://example.com/path?query=value&query2=value2");
         expect(
             universalLink2.decodePath(
                 "/v/https///example.com/path1/path2?query=value&query2=value2",
-            ),
+            )?.url,
         ).toBe("https://example.com/path1/path2?query=value&query2=value2");
 
-        expect(universalLink2.decodePath("/v/mailto/test@test.com")).toBe(
+        expect(universalLink2.decodePath("/v/mailto/test@test.com")?.url).toBe(
             "mailto:test@test.com",
         );
 
-        expect(universalLink2.decodePath("/v/file////Users/user")).toBe(
+        expect(universalLink2.decodePath("/v/file////Users/user")?.url).toBe(
             "file:///Users/user",
         );
 
-        expect(universalLink2.decodePath("/v/https///中文.tw")).toBe(
+        expect(universalLink2.decodePath("/v/https///中文.tw")?.url).toBe(
             "https://中文.tw",
         );
 
         expect(
-            universalLink2.decodePath(
-                "/v/http///username:password@example.com",
-            ),
+            universalLink2.decodePath("/v/http///username:password@example.com")
+                ?.url,
         ).toBe("http://username:password@example.com");
 
         expect(universalLink2.decodePath("/v/javascript/alert('test')")).toBe(

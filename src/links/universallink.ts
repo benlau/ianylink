@@ -1,3 +1,4 @@
+import { DecodedLink } from "./types";
 import { UnicodeLinkEndecoder } from "./unicodelinkendecoder";
 
 const ENCODED_LINK_REGEX = /^\/u\/(?<encoded>[A-Za-z0-9_\-=]+)/;
@@ -19,7 +20,7 @@ export class UniversalLink {
         return URI_PREFIX + "/" + this.endecoder.encode(link);
     }
 
-    decodePath(path: string) {
+    decodePath(path: string): DecodedLink | undefined {
         const found = path.match(ENCODED_LINK_REGEX);
         if (found === null || found.groups == null) {
             return;
@@ -27,8 +28,8 @@ export class UniversalLink {
         const base64 = found.groups.encoded
             .replace(/-/g, "+")
             .replace(/_/g, "/");
-        const decoded = this.endecoder.decode(base64).trim();
-        return decoded;
+        const url = this.endecoder.decode(base64).trim();
+        return { url };
     }
 
     isEncodedPath(path: string) {

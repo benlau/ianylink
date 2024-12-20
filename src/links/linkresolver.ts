@@ -24,8 +24,7 @@ export class LinkResolver {
             return undefined;
         }
 
-        //@todo - validate the link
-        return type.decodePath(path);
+        return type.decodePath(path)?.url;
     }
 
     encode(prefix: string, link: string) {

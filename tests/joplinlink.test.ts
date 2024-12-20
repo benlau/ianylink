@@ -4,19 +4,22 @@ describe("JoplinLink", () => {
         const joplinkLink: JoplinLink = new JoplinLink();
 
         expect(
-            joplinkLink.decodePath("/j/n/12345678901234567890123456789012"),
+            joplinkLink.decodePath("/j/n/12345678901234567890123456789012")
+                ?.url,
         ).toBe(
             "joplin://x-callback-url/openNote?id=12345678901234567890123456789012",
         );
 
         expect(
-            joplinkLink.decodePath("/j/t/12345678901234567890123456789012"),
+            joplinkLink.decodePath("/j/t/12345678901234567890123456789012")
+                ?.url,
         ).toBe(
             "joplin://x-callback-url/openTag?id=12345678901234567890123456789012",
         );
 
         expect(
-            joplinkLink.decodePath("/j/f/12345678901234567890123456789012"),
+            joplinkLink.decodePath("/j/f/12345678901234567890123456789012")
+                ?.url,
         ).toBe(
             "joplin://x-callback-url/openFolder?id=12345678901234567890123456789012",
         );
