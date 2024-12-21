@@ -21,17 +21,17 @@ The IAnyLink project is designed to solve this problem. It can convert app links
     <tr>
       <td>Obsidian</td>
       <td><a href="obsidian://open?vault=your_vault&file=YOUR_NOTE">obsidian://open?vault=your_vault&file=YOUR_NOTE</a></td>
-      <td><a href="https://benlau.github.io/l/u/b2JzaWRpYW46Ly9vcGVuP3ZhdWx0PXlvdXJfdmF1bHQmZmlsZT1ZT1VSX05PVEU=">https://benlau.github.io/l/u/b2JzaWRpYW46Ly9vcGVuP3ZhdWx<br>0PXlvdXJfdmF1bHQmZmlsZT1ZT1VSX05PVEU=</a></td>
+      <td><a href="https://benlau.github.io/l/v/obsidian///open?vault=your_vault&file=YOUR_NOTE">https://benlau.github.io/l/v/obsidian///open?vault=your_vault&file=YOUR_NOTE</a></td>
     </tr>
     <tr>
       <td>VSCode</td>
       <td><a href="vscode://file/your-local-file-path">vscode://file/your-local-file-path</a></td>
-      <td><a href="https://benlau.github.io/l/u/dnNjb2RlOi8vZmlsZS95b3VyLWxvY2FsLWzpbGUtcGF0aA==">https://benlau.github.io/l/u/dnNjb2RlOi8vZmlsZS95<br>b3vy-LWxvY2FsLWzpbGUtcGF0aA==</a></td>
+      <td><a href="https://benlau.github.io/l/v/vscode///file/your-local-file-path">https://benlau.github.io/l/v/vscode///file/your-local-file-path</a></td>
     </tr>
     <tr>
       <td>Mailto Link</td>
       <td><a href="mailto:test@example.com?subject=Testing out mailto!">mailto:test@example.com?subject=Testing out mailto!</a></td>
-      <td><a href="https://benlau.github.io/l/u/bWFpbHRvOnRlc3RAZXhhbXBsZS5jb20_c3ViamVjdD1UZXN0aW5nIG91dCBtYWlsdG8h">https://benlau.github.io/l/u/bWFpbHRvOnRlc3RAZXhhbXBsZS<br>5jb20_c3ViamVjdD1UZXN0aW5nIG91dCBtYWlsdG8h</a></td>
+      <td><a href="https://benlau.github.io/l/v/mailto/test@example.com?subject=Testing out mailto!">https://benlau.github.io/l/v/mailto/test@example.com?subject=Testing out mailto!</a></td>
     </tr>
   </tbody>
 </table>
@@ -50,5 +50,10 @@ Build Instruction
 
 ```
 npm install
-NODE_ENV=prod npx parcel build --public-url https://benlau.github.io/l src/index.html 
+
+# Replace by your host
+export HOST=https://benlau.github.io
+export URI_PREFIX=/l
+export HELP_URL=https://github.com/benlau/ianylink
+NODE_ENV=production npx parcel build --public-url https://benlau.github.io/l src/index.html 
 ```
