@@ -1,2 +1,8 @@
-{ "format": { "comments": false } } 
+{ 
+  "mangle": true,
+  "compress": true,  
+  "format": { "comments": false }
+}
+
+
 
